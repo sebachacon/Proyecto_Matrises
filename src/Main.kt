@@ -1,5 +1,5 @@
-class Examen(var nombres: String) {
-    val plantilla: CharArray = charArrayOf('a', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b', 'd')
+class Examen(var nombres: Array<String> = Array(4) {""}) {
+    val plantillas: Array<Char> = arrayOf('a', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b', 'd')
     val notas: FloatArray = FloatArray(4)
     val respuestas: Array<CharArray> = Array(4) { CharArray(12) }
     var contador: Int = 0
@@ -12,38 +12,35 @@ class Examen(var nombres: String) {
 
     fun ToString() {
         for (i in 0 until contador) {
-            calculaNota(respuestas, plantilla, notas)
+            calculaNota(respuestas, plantillas, notas)
             val estados = estadoNota(notas)
-            println("Estudiante: ${nombres[i]} Respuestas: ${respuestas[i].joinToString("")} Notas: ${notas[i]} ${estados[i]}")
+            println("Estudiante: ${nombres[i]} Respuestas: ${respuestas[i].joinToString(" ")} Notas: ${notas[i]} ${estados[i]}")
         }
         val promedio = promedioGrupoo()
         println()
-        println("Promedio del grupo: $promedio")
+        println("Promedio del grupo es: $promedio")
         val mejor = mayorNota()
-        println("El estudiante con mayor nota es $mejor,")
+        println("El estudiante con mayor nota es de $mejor,")
     }
 
-    fun calculaNota(respuestas: Array<CharArray>, plantilla: Array<Char>, notas: FloatArray){
-        for (fila in respuestas.indices){
+    fun calculaNota(respuestas: Array<CharArray>, plantilla: Array<Char>, notas: FloatArray) {
+        for (fila in respuestas.indices) {
             var puntos = 0
-            for (columna in respuestas[fila].indices){
-                if (respuestas[fila][columna] == plantilla[columna]){
+            for (columna in respuestas[fila].indices) {
+                if (respuestas[fila][columna] == plantilla[columna]) {
                     puntos++
                 }
             }
-            notas[fila] = (puntos/12.0f) * 100
+            notas[fila] = (puntos*100/12.0f)
         }
     }
 
-    fun promedioGrupoo(): Float {
-        val sumas = 0.0f
-        for (i in notas.indices) {
-            sumas += notas[i]
-        }
-        return sumas/notas.size
+    fun promedioGrupoo():Float {
+        val suma = notas.sum()
+        return if (contador > 0) suma / contador else 0f
     }
 
-    fun mayorNota() {
+    fun mayorNota(): String {
         var mayor = notas[0]
         var nombre = 0
         for (i in notas.indices) {
@@ -55,14 +52,26 @@ class Examen(var nombres: String) {
         return nombres[nombre]
     }
 
-    fun estadoNota() {
-
+    fun estadoNota(notas: FloatArray): Array<String> {
+        val estados = Array(notas.size) { "" }
+        for (i in notas.indices) {
+            estados[i] = when {
+                notas[i] >= 70.0f -> "Aprobado"
+                notas[i] < 70.0f && notas[i] >= 60.0f -> "Aplazado"
+                else -> "Reprobo"
+            }
+        }
+        return estados
     }
 }
-
-fun main() {
-
-}
+        fun main() {
+            val Examen = Examen(arrayOf("Marta", "Pedro", "Juan", "Maria"))
+            Examen.leerRespuestas(charArrayOf('a', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b', 'd'))
+            Examen.leerRespuestas(charArrayOf('b', 'c', 'b', 'd', 'd', 'b', 'b', 'a', 'b', 'd', 'b'))
+            Examen.leerRespuestas(charArrayOf('c', 'c', 'b', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'b'))
+            Examen.leerRespuestas(charArrayOf('c', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b'))
+            Examen.ToString()
+        }
 
 
 
