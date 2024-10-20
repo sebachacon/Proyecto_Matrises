@@ -17,7 +17,7 @@ class Examen(var nombres: Array<String> = Array(4) {""}) {
             println("Estudiante: ${nombres[i]} Respuestas: ${respuestas[i].joinToString(" ")} " +
                     "Notas: ${notas[i]} ${estados[i]}")
         }
-        val promedio = promedioGrupoo() 
+        val promedio = promedioGrupoo()
         println()
         println("Promedio del grupo es: $promedio")
         val mejor = mayorNota()
@@ -65,15 +65,14 @@ class Examen(var nombres: Array<String> = Array(4) {""}) {
         return estados
     }
 }
-        fun main() {
-            val Examen = Examen(arrayOf("Marta", "Pedro", "Juan", "Maria"))
-            Examen.leerRespuestas(charArrayOf('a', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b', 'd'))
-            Examen.leerRespuestas(charArrayOf('b', 'c', 'b', 'd', 'd', 'b', 'b', 'a', 'b', 'd', 'b'))
-            Examen.leerRespuestas(charArrayOf('c', 'c', 'b', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'b'))
-            Examen.leerRespuestas(charArrayOf('c', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b'))
-            Examen.ToString()
-        }
-
+fun main() {
+    val Examen = Examen(arrayOf("Marta", "Pedro", "Juan ", "María"))
+    Examen.leerRespuestas(charArrayOf('a', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b', 'd'))
+    Examen.leerRespuestas(charArrayOf('b', 'c', 'b', 'd', 'd', 'b', 'b', 'a', 'b', 'd', 'b', 'd'))
+    Examen.leerRespuestas(charArrayOf('c', 'c', 'b', 'a', 'a', 'b', 'c', 'c', 'a', 'a', 'b', 'c'))
+    Examen.leerRespuestas(charArrayOf('c', 'c', 'b', 'a', 'd', 'b', 'b', 'c', 'a', 'a', 'b', 'c'))
+    Examen.ToString()
+}
 
 
 
