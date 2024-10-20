@@ -12,18 +12,19 @@ class Examen(var nombres: Array<String> = Array(4) {""}) {
 
     fun ToString() {
         for (i in 0 until contador) {
-            calculaNota(respuestas, plantillas, notas)
-            val estados = estadoNota(notas)
-            println("Estudiante: ${nombres[i]} Respuestas: ${respuestas[i].joinToString(" ")} Notas: ${notas[i]} ${estados[i]}")
+            calculaNotas(respuestas, plantillas, notas)
+            val estados = estadoNotas(notas)
+            println("Estudiante: ${nombres[i]} Respuestas: ${respuestas[i].joinToString(" ")} " +
+                    "Notas: ${notas[i]} ${estados[i]}")
         }
-        val promedio = promedioGrupoo()
+        val promedio = promedioGrupoo() 
         println()
         println("Promedio del grupo es: $promedio")
         val mejor = mayorNota()
-        println("El estudiante con mayor nota es de $mejor,")
+        println("El estudiante con mayor nota es $mejor")
     }
 
-    fun calculaNota(respuestas: Array<CharArray>, plantilla: Array<Char>, notas: FloatArray) {
+    fun calculaNotas(respuestas: Array<CharArray>, plantilla: Array<Char>, notas: FloatArray) {
         for (fila in respuestas.indices) {
             var puntos = 0
             for (columna in respuestas[fila].indices) {
@@ -52,7 +53,7 @@ class Examen(var nombres: Array<String> = Array(4) {""}) {
         return nombres[nombre]
     }
 
-    fun estadoNota(notas: FloatArray): Array<String> {
+    fun estadoNotas(notas: FloatArray): Array<String> {
         val estados = Array(notas.size) { "" }
         for (i in notas.indices) {
             estados[i] = when {
