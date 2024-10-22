@@ -25,14 +25,14 @@ class Examen(var nombres: Array<String> = Array(4) {""}) {
     }
 
     fun calculaNotas(respuestas: Array<CharArray>, plantilla: Array<Char>, notas: FloatArray) {
-        for (fila in respuestas.indices) {
+        for (f in respuestas.indices) {
             var puntos = 0
-            for (columna in respuestas[fila].indices) {
-                if (respuestas[fila][columna] == plantilla[columna]) {
+            for (c in respuestas[f].indices) {
+                if (respuestas[f][c] == plantilla[c]) {
                     puntos++
                 }
             }
-            notas[fila] = (puntos*100/12.0f)
+            notas[f] = (puntos*100/12.0f)
         }
     }
 
